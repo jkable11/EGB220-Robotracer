@@ -4,11 +4,17 @@
 #include <util/delay.h>
 
 int main(){
-	DDRC |= (1<<7)|(1<<6);
+	DDRE |= (1<<6);
+	DDRC &=0;
+
+	PORTC |= (1<<7);
+	//PORTE |=(1<<6);
 
 	while(1){
-		PORTC ^= (1<<7)|(1<<6);
-		_delay_ms(1000);
+		if(!((~PINC)&(1<<7))){
+			PORTE ^= (1<<6);
+		}
+		_delay_ms(500);
 	}
 
 	return 0;

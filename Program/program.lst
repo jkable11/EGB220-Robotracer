@@ -1,0 +1,105 @@
+   1               		.file	"program.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 CF93      		push r28
+  22 0002 DF93      		push r29
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LM2:
+  26 0004 EDE2      		ldi r30,lo8(45)
+  27 0006 F0E0      		ldi r31,hi8(45)
+  28 0008 8081      		ld r24,Z
+  29 000a 8064      		ori r24,lo8(64)
+  30 000c 8083      		st Z,r24
+  31               	.LM3:
+  32 000e E7E2      		ldi r30,lo8(39)
+  33 0010 F0E0      		ldi r31,hi8(39)
+  34 0012 8081      		ld r24,Z
+  35 0014 1082      		st Z,__zero_reg__
+  36               	.LM4:
+  37 0016 E8E2      		ldi r30,lo8(40)
+  38 0018 F0E0      		ldi r31,hi8(40)
+  39 001a 8081      		ld r24,Z
+  40 001c 8068      		ori r24,lo8(-128)
+  41 001e 8083      		st Z,r24
+  42               	.LM5:
+  43 0020 A6E2      		ldi r26,lo8(38)
+  44 0022 B0E0      		ldi r27,hi8(38)
+  45               	.LM6:
+  46 0024 CEE2      		ldi r28,lo8(46)
+  47 0026 D0E0      		ldi r29,hi8(46)
+  48 0028 60E4      		ldi r22,lo8(64)
+  49 002a 28E8      		ldi r18,lo8(5000)
+  50 002c 33E1      		ldi r19,hi8(5000)
+  51               	.LVL0:
+  52               	.LBB12:
+  53               	.LBB13:
+  54               	.LBB14:
+  55               	.LBB15:
+  56               	.LM7:
+  57 002e 48EC      		ldi r20,lo8(200)
+  58 0030 50E0      		ldi r21,hi8(200)
+  59               	.LVL1:
+  60               	.L4:
+  61               	.LBE15:
+  62               	.LBE14:
+  63               	.LBE13:
+  64               	.LBE12:
+  65               	.LM8:
+  66 0032 8C91      		ld r24,X
+  67 0034 8823      		tst r24
+  68 0036 04F0      		brlt .L2
+  69 0038 C901      		movw r24,r18
+  70 003a 00C0      		rjmp .L6
+  71               	.LVL2:
+  72               	.L2:
+  73               	.LM9:
+  74 003c 8881      		ld r24,Y
+  75 003e 8627      		eor r24,r22
+  76 0040 8883      		st Y,r24
+  77 0042 C901      		movw r24,r18
+  78               	.LVL3:
+  79               	.L6:
+  80               	.LBB19:
+  81               	.LBB18:
+  82               	.LBB17:
+  83               	.LBB16:
+  84               	.LM10:
+  85 0044 FA01      		movw r30,r20
+  86               	/* #APP */
+  87               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  88 0046 3197      		1: sbiw r30,1
+  89 0048 01F4      		brne 1b
+  90               	 ;  0 "" 2
+  91               	/* #NOAPP */
+  92               	.LBE16:
+  93               	.LBE17:
+  94               	.LM11:
+  95 004a 0197      		sbiw r24,1
+  96               	.LM12:
+  97 004c 01F0      		breq .L4
+  98 004e 00C0      		rjmp .L6
+  99               	.LBE18:
+ 100               	.LBE19:
+ 101               	.LFE6:
+ 127               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 program.c
+C:\cygwin64\tmp/ccZpt8CL.s:2      *ABS*:0000003f __SREG__
+C:\cygwin64\tmp/ccZpt8CL.s:3      *ABS*:0000003e __SP_H__
+C:\cygwin64\tmp/ccZpt8CL.s:4      *ABS*:0000003d __SP_L__
+C:\cygwin64\tmp/ccZpt8CL.s:5      *ABS*:00000034 __CCP__
+C:\cygwin64\tmp/ccZpt8CL.s:6      *ABS*:00000000 __tmp_reg__
+C:\cygwin64\tmp/ccZpt8CL.s:7      *ABS*:00000001 __zero_reg__
+C:\cygwin64\tmp/ccZpt8CL.s:18     .text:00000000 main
+
+NO UNDEFINED SYMBOLS

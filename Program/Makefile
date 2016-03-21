@@ -6,7 +6,7 @@ FORMAT = binary
 
 ##This needs to be set by you, everything else can be left
 
-TARGET = .\
+TARGET = ./program
 
 
 SRC = $(TARGET).c
@@ -72,7 +72,7 @@ all: begin gccversion sizebefore build sizeafter finished end
 build: elf bin 
 
 elf: $(TARGET).elf
-bin: ..\FLASH.bin
+bin: ./FLASH.bin
 
 
 
