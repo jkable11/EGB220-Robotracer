@@ -6,7 +6,7 @@ FORMAT = binary
 
 ##This needs to be set by you, everything else can be left
 
-TARGET = ..\SparkTest
+TARGET = .\
 
 
 SRC = $(TARGET).c
