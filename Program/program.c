@@ -1,18 +1,21 @@
 #include "program.h"
 
 int main(){
-	DDRE |= (1<<6);
-	DDRC &=0;
-
-	PORTC |= (1<<7);
-	//PORTE |=(1<<6);
 
 	while(1){
-		if(!((~PINC)&(1<<7))){
-			PORTE ^= (1<<6);
-		}
+		motor(90);
 		_delay_ms(500);
 	}
 
 	return 0;
+}
+
+void motor(int cycle){
+	DDRB |=(1<<7);
+	DDRD |=(1<<7);
+	TCCR0A |= (1<<7)|(1<<6)|(1<<5)|(1<<5)|1;
+	OCR0A = 255*(100-cycle)/100;
+	OCR0B = 255*(100-cycle)/100;
+	TCCR0B |= (1<<2);
+	TIMSK0 |=1;
 }

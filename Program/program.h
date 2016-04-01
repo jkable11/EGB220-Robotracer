@@ -13,4 +13,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+void motor(int cycle);
+
 #endif /* PROGRAM_PROGRAM_H_ */
