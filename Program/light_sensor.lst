@@ -1,0 +1,217 @@
+   1               		.file	"light_sensor.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	__vector_23
+  18               	__vector_23:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 1F92      		push __zero_reg__
+  22 0002 0F92      		push r0
+  23 0004 0FB6      		in r0,__SREG__
+  24 0006 0F92      		push r0
+  25 0008 1124      		clr __zero_reg__
+  26               	/* prologue: Signal */
+  27               	/* frame size = 0 */
+  28               	/* epilogue start */
+  29               	.LM2:
+  30 000a 0F90      		pop r0
+  31 000c 0FBE      		out __SREG__,r0
+  32 000e 0F90      		pop r0
+  33 0010 1F90      		pop __zero_reg__
+  34 0012 1895      		reti
+  35               	.LFE6:
+  37               	.global	__vector_29
+  39               	__vector_29:
+  40               	.LFB7:
+  41               	.LM3:
+  42 0014 1F92      		push __zero_reg__
+  43 0016 0F92      		push r0
+  44 0018 0FB6      		in r0,__SREG__
+  45 001a 0F92      		push r0
+  46 001c 1124      		clr __zero_reg__
+  47 001e 2F93      		push r18
+  48 0020 3F93      		push r19
+  49 0022 8F93      		push r24
+  50 0024 9F93      		push r25
+  51               	/* prologue: Signal */
+  52               	/* frame size = 0 */
+  53               	.LM4:
+  54 0026 8091 0000 		lds r24,active
+  55 002a 9091 0000 		lds r25,(active)+1
+  56 002e 892B      		or r24,r25
+  57 0030 01F4      		brne .L4
+  58               	.LM5:
+  59 0032 8091 7900 		lds r24,121
+  60 0036 8093 0000 		sts baseline,r24
+  61               	.LM6:
+  62 003a 81E0      		ldi r24,lo8(1)
+  63 003c 90E0      		ldi r25,hi8(1)
+  64 003e 9093 0000 		sts (active)+1,r25
+  65 0042 8093 0000 		sts active,r24
+  66               	.L4:
+  67               	.LM7:
+  68 0046 8091 7900 		lds r24,121
+  69 004a 8093 0000 		sts sensor_out,r24
+  70               	.LM8:
+  71 004e 2091 0000 		lds r18,sensor_out
+  72 0052 8091 0000 		lds r24,baseline
+  73 0056 3327      		clr r19
+  74 0058 27FD      		sbrc r18,7
+  75 005a 3095      		com r19
+  76 005c 9927      		clr r25
+  77 005e 87FD      		sbrc r24,7
+  78 0060 9095      		com r25
+  79 0062 4E96      		adiw r24,30
+  80 0064 2817      		cp r18,r24
+  81 0066 3907      		cpc r19,r25
+  82 0068 04F0      		brlt .L5
+  83               	.LM9:
+  84 006a 17BC      		out 71-32,__zero_reg__
+  85 006c 00C0      		rjmp .L7
+  86               	.L5:
+  87               	.LM10:
+  88 006e 2091 0000 		lds r18,sensor_out
+  89 0072 8091 0000 		lds r24,baseline
+  90 0076 3327      		clr r19
+  91 0078 27FD      		sbrc r18,7
+  92 007a 3095      		com r19
+  93 007c 9927      		clr r25
+  94 007e 87FD      		sbrc r24,7
+  95 0080 9095      		com r25
+  96 0082 8897      		sbiw r24,40
+  97 0084 8217      		cp r24,r18
+  98 0086 9307      		cpc r25,r19
+  99 0088 04F0      		brlt .L7
+ 100               	.LM11:
+ 101 008a 8FEF      		ldi r24,lo8(-1)
+ 102 008c 87BD      		out 71-32,r24
+ 103               	.L7:
+ 104               	/* epilogue start */
+ 105               	.LM12:
+ 106 008e 9F91      		pop r25
+ 107 0090 8F91      		pop r24
+ 108 0092 3F91      		pop r19
+ 109 0094 2F91      		pop r18
+ 110 0096 0F90      		pop r0
+ 111 0098 0FBE      		out __SREG__,r0
+ 112 009a 0F90      		pop r0
+ 113 009c 1F90      		pop __zero_reg__
+ 114 009e 1895      		reti
+ 115               	.LFE7:
+ 117               	.global	init
+ 119               	init:
+ 120               	.LFB8:
+ 121               	.LM13:
+ 122               	/* prologue: function */
+ 123               	/* frame size = 0 */
+ 124               	.LM14:
+ 125 00a0 E4E2      		ldi r30,lo8(36)
+ 126 00a2 F0E0      		ldi r31,hi8(36)
+ 127 00a4 8081      		ld r24,Z
+ 128 00a6 8068      		ori r24,lo8(-128)
+ 129 00a8 8083      		st Z,r24
+ 130               	.LM15:
+ 131 00aa EAE2      		ldi r30,lo8(42)
+ 132 00ac F0E0      		ldi r31,hi8(42)
+ 133 00ae 8081      		ld r24,Z
+ 134 00b0 8068      		ori r24,lo8(-128)
+ 135 00b2 8083      		st Z,r24
+ 136               	.LM16:
+ 137 00b4 E4E4      		ldi r30,lo8(68)
+ 138 00b6 F0E0      		ldi r31,hi8(68)
+ 139 00b8 8081      		ld r24,Z
+ 140 00ba 816E      		ori r24,lo8(-31)
+ 141 00bc 8083      		st Z,r24
+ 142               	.LM17:
+ 143 00be 8FEF      		ldi r24,lo8(-1)
+ 144 00c0 87BD      		out 71-32,r24
+ 145               	.LM18:
+ 146 00c2 88BD      		out 72-32,r24
+ 147               	.LM19:
+ 148 00c4 E5E4      		ldi r30,lo8(69)
+ 149 00c6 F0E0      		ldi r31,hi8(69)
+ 150 00c8 8081      		ld r24,Z
+ 151 00ca 8460      		ori r24,lo8(4)
+ 152 00cc 8083      		st Z,r24
+ 153               	.LM20:
+ 154 00ce EEE6      		ldi r30,lo8(110)
+ 155 00d0 F0E0      		ldi r31,hi8(110)
+ 156 00d2 8081      		ld r24,Z
+ 157 00d4 8160      		ori r24,lo8(1)
+ 158 00d6 8083      		st Z,r24
+ 159               	.LM21:
+ 160 00d8 ECE7      		ldi r30,lo8(124)
+ 161 00da F0E0      		ldi r31,hi8(124)
+ 162 00dc 8081      		ld r24,Z
+ 163 00de 806E      		ori r24,lo8(-32)
+ 164 00e0 8083      		st Z,r24
+ 165               	.LM22:
+ 166 00e2 EAE7      		ldi r30,lo8(122)
+ 167 00e4 F0E0      		ldi r31,hi8(122)
+ 168 00e6 8081      		ld r24,Z
+ 169 00e8 8F6B      		ori r24,lo8(-65)
+ 170 00ea 8083      		st Z,r24
+ 171               	.LM23:
+ 172 00ec 8081      		ld r24,Z
+ 173 00ee 8064      		ori r24,lo8(64)
+ 174 00f0 8083      		st Z,r24
+ 175               	.LM24:
+ 176 00f2 1092 7B00 		sts 123,__zero_reg__
+ 177               	/* epilogue start */
+ 178               	.LM25:
+ 179 00f6 0895      		ret
+ 180               	.LFE8:
+ 182               	.global	main
+ 184               	main:
+ 185               	.LFB9:
+ 186               	.LM26:
+ 187               	/* prologue: function */
+ 188               	/* frame size = 0 */
+ 189               	.LM27:
+ 190               	/* #APP */
+ 191               	 ;  48 "light_sensor.c" 1
+ 192 00f8 7894      		sei
+ 193               	 ;  0 "" 2
+ 194               	.LM28:
+ 195               	/* #NOAPP */
+ 196 00fa 0E94 0000 		call init
+ 197               	.L11:
+ 198 00fe 00C0      		rjmp .L11
+ 199               	.LFE9:
+ 201               	.global	sensor_out
+ 202               	.global	sensor_out
+ 203               		.section .bss
+ 206               	sensor_out:
+ 207 0000 00        		.skip 1,0
+ 208               	.global	baseline
+ 209               	.global	baseline
+ 212               	baseline:
+ 213 0001 00        		.skip 1,0
+ 214               	.global	active
+ 215               	.global	active
+ 218               	active:
+ 219 0002 0000      		.skip 2,0
+ 268               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 light_sensor.c
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:2      *ABS*:0000003f __SREG__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:5      *ABS*:00000034 __CCP__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:18     .text:00000000 __vector_23
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:39     .text:00000014 __vector_29
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:218    .bss:00000002 active
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:212    .bss:00000001 baseline
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:206    .bss:00000000 sensor_out
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:119    .text:000000a0 init
+C:\Users\Jon\AppData\Local\Temp/cc7Akw0K.s:184    .text:000000f8 main
+
+UNDEFINED SYMBOLS
+__do_clear_bss
